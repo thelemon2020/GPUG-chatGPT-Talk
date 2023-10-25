@@ -19,8 +19,9 @@ class ChatGPTService implements ChatGPTServiceInterface
     {
         $prompt = $request->prompt;
         $temperature = $request->temp;
-        $response = $this->parseResponse($this->client->sendToChatGPT($prompt, $temperature));
-        return $response;
+        $response = $this->client->sendToChatGPT($prompt, $temperature);
+        $parsedResponse = $this->parseResponse($response);
+        return $parsedResponse;
     }
 
     private function parseResponse(Response $response): string
